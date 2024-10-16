@@ -68,12 +68,16 @@ main {
     justify-content: space-evenly;
 }
 
-#currentScore {
+#currentPlayer {
     color: var(--foreground);
     font-size: 24pt;
 }
 
+/* .lower form {
+} */
+
 .lower button {
+    margin: 12px;
     font-size: 18pt;
     width: 80px;
     border-radius: 24px;

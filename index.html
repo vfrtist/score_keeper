@@ -18,23 +18,17 @@
 
 <body>
     <main class="vertical container">
-        <div class="upper grid">
-            <span class="player">P1</span>
-            <span class="cabin">2</span>
-            <span class="cabin">50%</span>
-
-            <span class="player">P2</span>
-            <span class="cabin">1</span>
-            <span class="cabin">25%</span>
-
-            <span id="Total">Total</span>
-            <span>4</span>
+        <div class="upper grid" id="player_grid">
+            <span id="total">Total</span>
+            <span>0</span>
         </div>
         <div class="lower horizontal container">
-            <span id="currentScore">P1</span>
-            <button type="button">0</button>
-            <button type="button">1/2</button>
-            <button type="button">1</button>
+            <span id="currentPlayer">Add points to P1</span>
+            <form id="score">
+                <button type="submit" value=0>0</button>
+                <button type="submit" value=.5>1/2</button>
+                <button type="submit" value=1>1</button>
+            </form>
         </div>
     </main>
     <script src="app.js"></script>
