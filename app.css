@@ -1,6 +1,6 @@
 :root {
     --font-color: rgb(26, 25, 26);
-    --foreground: #f0e5c0ee;
+    --foreground: #f9ebd0;
     --background: linear-gradient(90deg, rgb(229 217 179) 0%, rgb(187 158 122) 100%);
     --shadow: #68516b5e;
     --accent: #f0a958;
@@ -98,7 +98,7 @@ body {
 
 .icon {
     fill: var(--accent);
-    width: 24px;
+    width: 18px;
 }
 
 #playerUp {
@@ -106,16 +106,12 @@ body {
 }
 
 #playerCount {
-    width: 32px;
+    width: 40px;
     text-align: center;
-    font-size: 18pt;
+    font-size: 20pt;
     border: none;
     background: none;
     outline: none;
-}
-
-#playerCounter {
-    gap: 8px;
 }
 
 .lower {
