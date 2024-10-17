@@ -56,13 +56,21 @@ class ScoreBoard {
         this.add_player()
     }
 
-    add_player() { this.players.push(new Player('P' + (this.players.length + 1))) }
+    add_player() {
+        this.players.push(new Player('P' + (this.players.length + 1)))
+        document.querySelector(':root').style.setProperty('--playerCount', this.players.length)
+        this.move_indicator()
+    }
+
     remove_player() {
         const player = this.players.pop()
         player.display.previousElementSibling.remove()
         player.display.remove()
         player.percent.remove()
+        document.querySelector(':root').style.setProperty('--playerCount', this.players.length)
+        this.move_indicator()
     }
+
     add_score(value) {
         this.round_total()
         this.player.update_score(value)

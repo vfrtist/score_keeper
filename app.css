@@ -8,6 +8,7 @@
     --title: #af8340;
     --inactive: #d6c5cb88;
     --currentPlayer: 0;
+    --playerCount: 1;
 }
 
 * {
@@ -69,7 +70,8 @@ body {
 
 .grid {
     display: grid;
-    grid: auto-flow / 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(var(--playerCount), 1fr) 80px;
     width: 100%;
     place-items: center;
 }
@@ -122,7 +124,6 @@ body {
 }
 
 #currentPlayer {
-    /* color: var(--font-color); */
     font-size: 24pt;
 }
 
