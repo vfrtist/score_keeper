@@ -1,11 +1,11 @@
 :root {
     --font-color: rgb(26, 25, 26);
-    --foreground: #fceef5e3;
-    --background: linear-gradient(90deg, rgba(171, 97, 126, 1) 0%, rgb(133, 96, 122) 100%);
+    --foreground: #f0e5c0ee;
+    --background: linear-gradient(90deg, rgb(229 217 179) 0%, rgb(187 158 122) 100%);
     --shadow: #68516b5e;
-    --title: #fceef5;
-    --accent: #f688e1;
-    --light-accent: #ffd0e2d1;
+    --accent: #f0a958;
+    --action: #f7df5b;
+    --title: #af8340;
     --inactive: #d6c5cb88;
     --currentPlayer: 0;
 }
@@ -16,19 +16,27 @@
     font-family: "Protest Strike", sans-serif;
     font-weight: 300;
     box-sizing: border-box;
+    color: var(--font-color);
 }
 
 li {
     list-style-type: none;
 }
 
-main {
+body {
     width: 100dvw;
     height: 100dvh;
-    background: var(--background);
     color: var(--font-color);
     box-sizing: border-box;
-    padding: 20dvh 25%;
+    padding: 20dvh 15%;
+    background: var(--background);
+}
+
+#center {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    height: 100%;
 }
 
 .vertical {
@@ -47,12 +55,15 @@ main {
     box-sizing: border-box;
 }
 
-.upper {
-    height: 65dvh;
+.card {
     background: var(--foreground);
-    border-radius: 24px;
+    border-radius: 40px;
+    width: 100%;
+}
+
+.upper {
+    height: 65%;
     font-size: 24pt;
-    box-shadow: 8px 8px 8px var(--shadow);
     position: relative;
 }
 
@@ -64,34 +75,54 @@ main {
 }
 
 .player {
-    /* border-bottom: 1px solid var(--shadow); */
     outline: none;
     position: relative;
 }
 
 .player:focus {
     background: linear-gradient(0deg, var(--accent) 0% 2px, rgba(255, 255, 255, 0) 2px);
-    /* border-bottom: 2px solid var(--accent); */
 }
 
 .indicator {
     position: absolute;
-    left: -36px;
-    width: 24px;
+    left: -12px;
+    width: 32px;
     border-radius: 50%;
     aspect-ratio: 1/1;
-    background: var(--foreground);
-    top: var(--currentPlayer);
+    background: var(--accent);
+    top: calc(var(--currentPlayer) + .5rem);
     transition: top .2s ease;
 }
 
+.icon {
+    fill: var(--accent);
+    width: 24px;
+}
+
+#playerUp {
+    rotate: 180deg;
+}
+
+#playerCount {
+    width: 32px;
+    text-align: center;
+    font-size: 18pt;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+#playerCounter {
+    gap: 8px;
+}
+
 .lower {
-    height: 35dvh;
+    height: 20dvh;
     justify-content: space-evenly;
 }
 
 #currentPlayer {
-    color: var(--foreground);
+    /* color: var(--font-color); */
     font-size: 24pt;
 }
 
@@ -101,14 +132,16 @@ main {
     font-size: 18pt;
     width: 80px;
     border-radius: 24px;
+    border-radius: 50%;
     aspect-ratio: 1/1;
     border: none;
-    transition: all .2s;
-    background: var(--foreground);
+    transition: outline .1s;
+    background: var(--accent);
+    outline: 0px solid var(--action);
 }
 
 button:hover {
-    outline: 4px solid var(--accent);
+    outline: 4px solid var(--action);
 }
 
 .hidden {
@@ -128,4 +161,16 @@ button:hover {
 
 .hidden {
     display: none !important;
+}
+
+#settings {
+    width: 100%;
+    height: 100%;
+    font-size: 18pt;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#settings>div {
+    gap: 8px;
 }

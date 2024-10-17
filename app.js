@@ -1,7 +1,10 @@
-const playerGrid = document.querySelector('#player_grid')
+const playerGrid = document.querySelector('#playerGrid')
 const total = document.querySelector('#total')
 const scoreForm = document.querySelector('#score')
 const currentPlayer = document.querySelector('#currentPlayer')
+const playerCount = document.querySelector('#playerCount')
+const up = document.querySelector('#playerUp')
+const down = document.querySelector('#playerDown')
 
 function make(item) { return document.createElement(item.toString()) }
 
@@ -50,16 +53,22 @@ class ScoreBoard {
         this.players = []
         this.currentPlayer = 0;
         this.gameTotal = 0;
+        this.add_player()
     }
 
     add_player() { this.players.push(new Player('P' + (this.players.length + 1))) }
-    remove_player(player) { this.players.pop(player) }
+    remove_player() {
+        const player = this.players.pop()
+        player.display.previousElementSibling.remove()
+        player.display.remove()
+        player.percent.remove()
+    }
     add_score(value) {
         this.round_total()
         this.player.update_score(value)
         this.currentPlayer = (this.currentPlayer + 1) % this.players.length
         currentPlayer.innerText = 'Add points to ' + this.player.name
-        document.querySelector(':root').style.setProperty('--currentPlayer', this.player.display.offsetTop + 'px')
+        this.move_indicator()
     }
 
     get player() {
@@ -74,20 +83,40 @@ class ScoreBoard {
             score.innerText = this.gameTotal
         }
     }
+
+    move_indicator() {
+        document.querySelector(':root').style.setProperty('--currentPlayer', this.player.display.offsetTop + 'px')
+    }
 }
 
 const board = new ScoreBoard()
 
-for (let i = 0; i < 3; i++) {
-    board.add_player()
-}
 const indicator = make('div')
 indicator.classList.add('indicator')
 playerGrid.append(indicator)
-board.player
+board.move_indicator()
 
 scoreForm.addEventListener('submit', (e) => {
     e.preventDefault()
     let score = e.submitter.value
     board.add_score(score)
+})
+
+playerCount.addEventListener('change', (e) => {
+    const changeTo = e.target.value
+    if (0 < changeTo && changeTo < 6) {
+        while (board.players.length != e.target.value) {
+            board.players.length > e.target.value ? board.remove_player() : board.add_player()
+        }
+    }
+})
+
+up.addEventListener('click', (e) => {
+    playerCount.value = parseInt(playerCount.value) + 1
+    board.add_player()
+})
+
+down.addEventListener('click', (e) => {
+    playerCount.value = parseInt(playerCount.value) - 1
+    board.remove_player()
 })
