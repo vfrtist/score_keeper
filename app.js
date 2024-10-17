@@ -10,34 +10,38 @@ class Player {
         this.name = name
         this.score = 0
         this.display = make('span')
+        this.percent = make('span')
         this.setup()
     }
 
     setup() {
-        let name = make('span')
-        let percent = make('span')
+        const name = make('span')
 
         name.classList.add('player')
         this.display.classList.add('cabin')
-        percent.classList.add('cabin')
+        this.percent.classList.add('cabin')
         name.contentEditable = true;
 
         name.innerText = this.name
         this.display.innerText = this.score
-        percent.innerText = '0%'
+        this.percent.innerText = '0%'
 
         playerGrid.insertBefore(name, total)
         playerGrid.insertBefore(this.display, total)
-        playerGrid.insertBefore(percent, total)
+        playerGrid.insertBefore(this.percent, total)
 
         name.addEventListener('focusout', (e) => {
             this.name = e.target.innerText
+            if (this == board.player) {
+                currentPlayer.innerText = 'Add points to ' + board.player.name
+            }
         })
     }
 
     update_score(value) {
         this.score += parseFloat(value)
         this.display.innerText = this.score
+        this.percent.innerText = Math.round(100 * this.score / board.gameTotal) + "%"
     }
 }
 
@@ -45,16 +49,30 @@ class ScoreBoard {
     constructor() {
         this.players = []
         this.currentPlayer = 0;
+        this.gameTotal = 0;
     }
 
     add_player() { this.players.push(new Player('P' + (this.players.length + 1))) }
     remove_player(player) { this.players.pop(player) }
     add_score(value) {
-        let cp = this.players[this.currentPlayer]
-        cp.update_score(value)
-        this.currentPlayer + 1 < this.players.length ? this.currentPlayer++ : this.currentPlayer = 0
-        currentPlayer.innerText = 'Add points to ' + cp.name
-        // Need to update to the next player, not the current one....
+        this.round_total()
+        this.player.update_score(value)
+        this.currentPlayer = (this.currentPlayer + 1) % this.players.length
+        currentPlayer.innerText = 'Add points to ' + this.player.name
+        document.querySelector(':root').style.setProperty('--currentPlayer', this.player.display.offsetTop + 'px')
+    }
+
+    get player() {
+        return this.players[this.currentPlayer]
+    }
+
+    round_total() {
+        if (this.currentPlayer == 0) {
+            const score = total.nextElementSibling
+            const max = scoreForm.lastElementChild.value
+            this.gameTotal += parseFloat(max)
+            score.innerText = this.gameTotal
+        }
     }
 }
 
@@ -63,6 +81,10 @@ const board = new ScoreBoard()
 for (let i = 0; i < 3; i++) {
     board.add_player()
 }
+const indicator = make('div')
+indicator.classList.add('indicator')
+playerGrid.append(indicator)
+board.player
 
 scoreForm.addEventListener('submit', (e) => {
     e.preventDefault()

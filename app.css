@@ -6,9 +6,8 @@
     --title: #fceef5;
     --accent: #f688e1;
     --light-accent: #ffd0e2d1;
-    --player1: #efbf74;
-    --player2: #38ba8d;
     --inactive: #d6c5cb88;
+    --currentPlayer: 0;
 }
 
 * {
@@ -54,6 +53,7 @@ main {
     border-radius: 24px;
     font-size: 24pt;
     box-shadow: 8px 8px 8px var(--shadow);
+    position: relative;
 }
 
 .grid {
@@ -61,6 +61,28 @@ main {
     grid: auto-flow / 1fr 1fr 1fr;
     width: 100%;
     place-items: center;
+}
+
+.player {
+    /* border-bottom: 1px solid var(--shadow); */
+    outline: none;
+    position: relative;
+}
+
+.player:focus {
+    background: linear-gradient(0deg, var(--accent) 0% 2px, rgba(255, 255, 255, 0) 2px);
+    /* border-bottom: 2px solid var(--accent); */
+}
+
+.indicator {
+    position: absolute;
+    left: -36px;
+    width: 24px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background: var(--foreground);
+    top: var(--currentPlayer);
+    transition: top .2s ease;
 }
 
 .lower {
@@ -73,8 +95,6 @@ main {
     font-size: 24pt;
 }
 
-/* .lower form {
-} */
 
 .lower button {
     margin: 12px;
