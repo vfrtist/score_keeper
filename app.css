@@ -259,6 +259,7 @@ button:hover {
 
     #settings {
         flex-direction: row;
+        align-items: flex-start;
     }
 
     .grid {
