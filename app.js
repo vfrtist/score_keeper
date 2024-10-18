@@ -94,15 +94,15 @@ class ScoreBoard {
     }
 
     move_indicator() {
-        document.querySelector(':root').style.setProperty('--currentPlayer', this.player.display.offsetTop + 'px')
+        this.players.forEach(player => {
+            player.display.previousElementSibling.classList.remove('active')
+        });
+        this.player.display.previousElementSibling.classList.add('active');
     }
 }
 
 const board = new ScoreBoard()
 
-const indicator = make('div')
-indicator.classList.add('indicator')
-playerGrid.append(indicator)
 board.move_indicator()
 
 scoreForm.addEventListener('submit', (e) => {

@@ -85,21 +85,18 @@ body {
 .player {
     outline: none;
     position: relative;
+    animation: out .35s forwards;
+    background: linear-gradient(0deg, var(--font-color) 0% 33%, var(--accent) 33% 66%, var(--font-color) 66%);
+    background-size: 100% 310%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    color: transparent;
 }
 
 .player:focus {
+    color: var(--font-color);
     background: linear-gradient(0deg, var(--accent) 0% 2px, rgba(255, 255, 255, 0) 2px);
-}
-
-.indicator {
-    position: absolute;
-    left: 3%;
-    width: 32px;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    background: var(--accent);
-    top: var(--currentPlayer);
-    transition: top .2s ease;
 }
 
 .icon {
@@ -270,5 +267,30 @@ button:hover {
         width: 20px;
         top: calc(var(--currentPlayer) + 9px);
         left: 5%;
+    }
+}
+
+.active {
+    /* color: transparent; */
+    animation: in .35s forwards;
+}
+
+@keyframes in {
+    0% {
+        background-position: bottom;
+    }
+
+    100% {
+        background-position: center;
+    }
+}
+
+@keyframes out {
+    0% {
+        background-position: center;
+    }
+
+    100% {
+        background-position: top;
     }
 }
