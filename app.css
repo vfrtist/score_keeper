@@ -38,6 +38,7 @@ body {
     grid-template-columns: 200px 1fr;
     gap: 60px;
     height: 100%;
+    width: 100%;
 }
 
 .vertical {
@@ -97,7 +98,7 @@ body {
     border-radius: 50%;
     aspect-ratio: 1/1;
     background: var(--accent);
-    top: calc(var(--currentPlayer));
+    top: var(--currentPlayer);
     transition: top .2s ease;
 }
 
@@ -235,9 +236,38 @@ button:hover {
 
     .indicator {
         width: 28px;
+        top: calc(var(--currentPlayer) + 5px);
+        left: 4%;
     }
 
     #center {
         gap: 24px;
+    }
+}
+
+
+@media screen and (max-width: 520px) {
+
+    #center {
+        grid-template-columns: 1fr;
+        grid-template-rows: 120px 1fr;
+    }
+
+    body {
+        padding-block: 12dvh;
+    }
+
+    #settings {
+        flex-direction: row;
+    }
+
+    .grid {
+        grid-template-rows: repeat(var(--playerCount), 1fr) 48px;
+    }
+
+    .indicator {
+        width: 20px;
+        top: calc(var(--currentPlayer) + 9px);
+        left: 5%;
     }
 }
