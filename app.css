@@ -202,6 +202,7 @@ button:hover {
     font-size: 18pt;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 
 .bigGap {
@@ -215,5 +216,28 @@ button:hover {
 @media screen and (max-width: 900px) {
     body {
         padding-inline: 10%;
+    }
+
+    #center {
+        grid-template-columns: 150px 1fr;
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    body {
+        padding-inline: 24px;
+    }
+
+    .lower button {
+        width: 50px;
+    }
+
+    .indicator {
+        width: 28px;
+    }
+
+    #center {
+        gap: 24px;
     }
 }
