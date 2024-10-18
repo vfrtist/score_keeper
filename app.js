@@ -5,6 +5,7 @@ const currentPlayer = document.querySelector('#currentPlayer')
 const playerCount = document.querySelector('#playerCount')
 const up = document.querySelector('#playerUp')
 const down = document.querySelector('#playerDown')
+const half = document.querySelector('#half')
 
 function make(item) { return document.createElement(item.toString()) }
 
@@ -127,4 +128,9 @@ up.addEventListener('click', (e) => {
 down.addEventListener('click', (e) => {
     playerCount.value = parseInt(playerCount.value) - 1
     board.remove_player()
+})
+
+half.addEventListener('click', (e) => {
+    const halfButton = score.querySelector('.half')
+    e.target.checked ? halfButton.classList.remove('hidden') : halfButton.classList.add('hidden')
 })

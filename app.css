@@ -1,11 +1,11 @@
 :root {
     --font-color: rgb(26, 25, 26);
-    --foreground: #f9ebd0;
-    --background: linear-gradient(90deg, rgb(229 217 179) 0%, rgb(187 158 122) 100%);
+    --foreground: #e6d6b3;
+    --background: #9d886d;
     --shadow: #68516b5e;
     --accent: #f0a958;
-    --action: #f7df5b;
-    --title: #af8340;
+    --action: hsl(0, 0%, 100%);
+    --title: #ffffff;
     --inactive: #d6c5cb88;
     --currentPlayer: 0;
     --playerCount: 1;
@@ -60,6 +60,11 @@ body {
     background: var(--foreground);
     border-radius: 40px;
     width: 100%;
+    border: 2px solid var(--title);
+    box-sizing: border-box;
+    padding: 16px;
+    outline: 2px solid var(--title);
+    outline-offset: -8px;
 }
 
 .upper {
@@ -71,7 +76,7 @@ body {
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(var(--playerCount), 1fr) 80px;
+    grid-template-rows: repeat(var(--playerCount), 1fr) 72px;
     width: 100%;
     place-items: center;
 }
@@ -87,18 +92,24 @@ body {
 
 .indicator {
     position: absolute;
-    left: -12px;
+    left: 3%;
     width: 32px;
     border-radius: 50%;
     aspect-ratio: 1/1;
     background: var(--accent);
-    top: calc(var(--currentPlayer) + .5rem);
+    top: calc(var(--currentPlayer));
     transition: top .2s ease;
 }
 
 .icon {
     fill: var(--accent);
     width: 18px;
+    transition: fill .2s;
+}
+
+.icon:hover {
+    cursor: pointer;
+    fill: var(--action);
 }
 
 #playerUp {
@@ -114,9 +125,39 @@ body {
     outline: none;
 }
 
+#half {
+    width: 24px;
+    border: none;
+    outline: none;
+    aspect-ratio: 1/1;
+    background: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+#half::after {
+    border-radius: 8px;
+    background: var(--foreground);
+    border: 2px solid var(--accent);
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: all .2s;
+    position: relative;
+}
+
+#half:checked::after {
+    border-radius: 50%;
+    background: var(--accent);
+}
+
 .lower {
     height: 20dvh;
-    justify-content: space-evenly;
+}
+
+main.vertical.container {
+    justify-content: space-between;
 }
 
 #currentPlayer {
@@ -125,7 +166,6 @@ body {
 
 
 .lower button {
-    margin: 12px;
     font-size: 18pt;
     width: 80px;
     border-radius: 24px;
@@ -139,10 +179,6 @@ body {
 
 button:hover {
     outline: 4px solid var(--action);
-}
-
-.hidden {
-    visibility: hidden !important;
 }
 
 .cabin {
@@ -168,6 +204,16 @@ button:hover {
     align-items: center;
 }
 
-#settings>div {
+.bigGap {
+    gap: 24px;
+}
+
+.smallGap {
     gap: 8px;
+}
+
+@media screen and (max-width: 900px) {
+    body {
+        padding-inline: 10%;
+    }
 }

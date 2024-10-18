@@ -19,7 +19,7 @@
 <body>
     <div id="center">
         <aside id="settings" class="vertical container card cabin">
-            <div class="vertical container">
+            <div class="vertical container smallGap">
                 <div class="cabin">No. of Players</div>
                 <div class="horizontal container" id="playerCounter">
                     <svg data-value="Undo" xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 17.9 25.9"
@@ -39,14 +39,9 @@
                     </svg>
                 </div>
             </div>
-            <div class="vertical container">
-                <div class="cabin">Half Score</div>
-                <input type="checkbox" name="half" id="half">
-            </div>
-            <div class="vertical container">
-                <div class="cabin">Theme</div>
-                <button type="button">Dark</button>
-                <button type="button">Light</button>
+            <div class="vertical container smallGap">
+                <div class="cabin">Half Point</div>
+                <input type="checkbox" name="half" id="half" aria-label="Include Half Score On or Off" checked>
             </div>
         </aside>
         <main class="vertical container">
@@ -54,11 +49,11 @@
                 <span id="total">Total</span>
                 <span>0</span>
             </div>
-            <div class="lower vertical container">
+            <div class="lower vertical container smallGap">
                 <span id="currentPlayer">Add points to P1</span>
-                <form id="score" class="horizontal container">
+                <form id="score" class="horizontal container bigGap">
                     <button type="submit" value=0>0</button>
-                    <button type="submit" value=.5>1/2</button>
+                    <button type="submit" class="half" value=.5>1/2</button>
                     <button type="submit" value=1>1</button>
                 </form>
             </div>
